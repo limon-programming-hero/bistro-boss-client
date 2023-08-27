@@ -8,7 +8,7 @@ const FoodCard = ({ item }) => {
       </figure>
       <div className="card-body items-center bg-base-100">
         <h2 className="card-title">{name}</h2>
-        <p>{recipe}</p>
+        <p className="text-center">{recipe}</p>
         <div className="card-actions justify-end">
           <SharedButton text={"add to card"}></SharedButton>
         </div>

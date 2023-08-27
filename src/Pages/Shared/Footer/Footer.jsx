@@ -1,8 +1,8 @@
 const Footer = () => {
   return (
-    <footer className="bg-neutral text-neutral-content pt-10">
-      <div className="footer p-10 bg-neutral text-neutral-content">
-        <div>
+    <footer className="bg-neutral text-neutral-content">
+      <div className="grid grid-cols-1 lg:grid-cols-2 text-neutral-content">
+        <div className="hover:bg-slate-800 w-full lg:w-1/2 px-28 mx-auto py-12">
           <svg
             width="50"
             height="50"
@@ -20,7 +20,7 @@ const Footer = () => {
             Providing reliable Food since 2020
           </p>
         </div>
-        <div>
+        <div className="hover:bg-slate-800 w-full lg:w-1/2 px-28 mx-auto py-12">
           <span className="footer-title">Social</span>
           <div className="grid grid-flow-col gap-4">
             <a>
