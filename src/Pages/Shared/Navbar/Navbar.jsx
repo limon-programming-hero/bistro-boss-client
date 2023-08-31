@@ -1,17 +1,76 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { authContext } from "../../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
+import { FaCartPlus } from "react-icons/fa";
+import UserCart from "../../../hooks/UserCart";
 
 const Navbar = () => {
+  const [cart] = UserCart();
+  const { user, LogOut } = useContext(authContext);
+  const handleLogOut = () => {
+    LogOut()
+      .then(() => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Successfully Logged Out!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          position: "top-end",
+          icon: "warning",
+          title: error,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  };
+  const buttonClassName =
+    "focus:btn-outline btn-ghost md:text-white mx-2 my-1 md:my-0";
   const navItems = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <NavLink className={buttonClassName} to="/">
+          Home
+        </NavLink>
       </li>
       <li>
-        <Link to="/menu">Our Menu</Link>
+        <NavLink className={buttonClassName} to="/menu">
+          Our Menu
+        </NavLink>
       </li>
       <li>
-        <Link to="/Shop">Our Shop</Link>
+        <NavLink className={buttonClassName} to="/order/salad">
+          Our Order
+        </NavLink>
       </li>
+      <li>
+        <NavLink className={buttonClassName} to="/dashboard/cart">
+          <FaCartPlus />+{cart ? `${cart.length}` : "0"}
+        </NavLink>
+      </li>
+      <li>
+        <NavLink className={buttonClassName} to="/secret">
+          Secret
+        </NavLink>
+      </li>
+      {user ? (
+        <li>
+          <button onClick={handleLogOut} className={buttonClassName}>
+            Log out
+          </button>
+        </li>
+      ) : (
+        <li>
+          <NavLink className={buttonClassName} to="/login">
+            Login
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (

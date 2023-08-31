@@ -1,13 +1,9 @@
-import { useEffect, useState } from "react";
 import SharedTitle from "../../Shared/SharedTitle/SharedTitle";
 import HomeTestimonialSlide from "./HomeTestimonialSlide";
+import Loading from "./../../../Component/Loader/Loading";
+import UserReviews from "../../../hooks/UserReviews";
 const HomeTestimonial = () => {
-  const [reviews, setReviews] = useState([]);
-  useEffect(() => {
-    fetch("reviews.json")
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
-  }, []);
+  const [reviews, loading] = UserReviews();
   return (
     <div className="w-3/4 mx-auto my-20">
       <SharedTitle
@@ -15,7 +11,11 @@ const HomeTestimonial = () => {
         heading="Testimonial"
       ></SharedTitle>
 
-      <HomeTestimonialSlide reviews={reviews}></HomeTestimonialSlide>
+      {loading ? (
+        <Loading></Loading>
+      ) : (
+        <HomeTestimonialSlide reviews={reviews}></HomeTestimonialSlide>
+      )}
     </div>
   );
 };

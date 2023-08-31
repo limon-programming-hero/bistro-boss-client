@@ -23,7 +23,7 @@ const HomeSlide = () => {
         spaceBetween={10}
         slidesPerView={3}
         onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
+        onSwiper={() => console.log("ok")}
       >
         <SwiperSlide>
           <img src={img1} alt="img1" />

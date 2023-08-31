@@ -1,34 +1,40 @@
 import { Helmet } from "react-helmet";
 import SharedCover from "../../Shared/SharedCover/SharedCover";
-import shopImg from "./../../../assets/shop/banner2.jpg";
+import OrderImg from "./../../../assets/shop/banner2.jpg";
 import UserMenu from "../../../hooks/userMenu";
 import Loading from "../../../Component/Loader/Loading";
 import FoodCard from "../../../Component/FoodCard/FoodCard";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-
-const Shop = () => {
+import { useParams } from "react-router-dom";
+//  TODO: add pagination in this page
+const Order = () => {
+  const allIndex = ["salad", "pizza", "soup", "dessert", "drinks"];
+  const { item } = useParams();
+  const index = allIndex.indexOf(item);
+  console.log(index);
   const [menu, loading] = UserMenu();
   const drinks = menu.filter((data) => data.category === "drinks");
   const dessert = menu.filter((data) => data.category === "dessert");
   const pizza = menu.filter((data) => data.category === "pizza");
   const salad = menu.filter((data) => data.category === "salad");
   const soup = menu.filter((data) => data.category === "soup");
+
   return (
     <div>
       <Helmet>
-        <title>Bistro Boss | Shop</title>
+        <title>Bistro Boss | Order</title>
       </Helmet>
       <SharedCover
-        heading={"Our Shop"}
+        heading={"Our Order"}
         subHeading={"Would You Like to Try a Dish?"}
-        image={shopImg}
+        image={OrderImg}
       ></SharedCover>
       {loading ? (
         <Loading></Loading>
       ) : (
         <div className="my-12">
-          <Tabs>
+          <Tabs defaultIndex={index}>
             <div className="w-fit mx-auto">
               <TabList>
                 <Tab>Salad</Tab>
@@ -80,4 +86,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default Order;

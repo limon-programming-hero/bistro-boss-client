@@ -7,12 +7,18 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 
 const HomeTestimonialSlide = ({ reviews }) => {
+  console.log(reviews);
   return (
     <div className="mt-10">
-      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-        {reviews?.map((review) => (
-          <>
-            <SwiperSlide key={review._id}>
+      <Swiper
+        key={3}
+        navigation={true}
+        modules={[Navigation]}
+        className="mySwiper"
+      >
+        {reviews?.map((review) => {
+          <div key={review._id}>
+            <SwiperSlide>
               <div className="items-center flex flex-col w-3/4 mx-auto gap-4">
                 <Rating
                   style={{ maxWidth: 180 }}
@@ -25,8 +31,9 @@ const HomeTestimonialSlide = ({ reviews }) => {
                 </h3>
               </div>
             </SwiperSlide>
-          </>
-        ))}
+            ;
+          </div>;
+        })}
       </Swiper>
     </div>
   );
