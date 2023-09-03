@@ -3,9 +3,11 @@ import SharedButton from "../../Pages/Shared/SharedButton/SharedButton";
 import { authContext } from "./../../AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import UserCart from "../../hooks/UserCart";
 const FoodCard = ({ item }) => {
   const { name, recipe, image, _id, price } = item;
   const { user } = useContext(authContext);
+  const [, refetch] = UserCart();
   const navigate = useNavigate();
 
   const handleAddCart = () => {
@@ -14,7 +16,7 @@ const FoodCard = ({ item }) => {
       name,
       image,
       price,
-      email: user.email,
+      email: user?.email,
       menuItemId: _id,
     };
     fetch("http://localhost:3000/carts", {
@@ -32,6 +34,7 @@ const FoodCard = ({ item }) => {
             showConfirmButton: false,
             timer: 900,
           });
+        refetch();
       });
     console.log(addItem);
   };
