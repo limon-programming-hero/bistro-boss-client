@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { authContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 
 const SignUp = () => {
@@ -14,6 +14,10 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const path = location?.state?.from?.pathname || "/";
+
   const HandleSignUp = (data) => {
     console.log(data);
     SignUpWithEmail(data.email, data.password)
@@ -21,6 +25,8 @@ const SignUp = () => {
         console.log(result.user);
         addNameAndPhoto(result.user, data.name, data.photoURL)
           .then(() => {
+            const user = { name: data.name, email: data.email };
+            setUserToDb(user);
             Swal.fire({
               position: "top-end",
               icon: "success",
@@ -28,6 +34,7 @@ const SignUp = () => {
               showConfirmButton: false,
               timer: 1500,
             });
+            navigate(path);
           })
           .catch((errors) => {
             Swal.fire({
@@ -40,6 +47,17 @@ const SignUp = () => {
           });
       })
       .catch((error) => console.log(error));
+  };
+  const setUserToDb = (user) => {
+    fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log({ data }));
   };
 
   return (

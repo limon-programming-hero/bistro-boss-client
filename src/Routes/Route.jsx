@@ -10,6 +10,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "../Layout/Dashboard";
 import DashboardReservation from "../Pages/Dashboard/DashboardReservation/DashboardReservation";
 import DashboardCart from "../Pages/Dashboard/DashBoardCart/DashBoardCart";
+import Admin from "./../Pages/Dashboard/Admin/Admin/Admin";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "reservation",
         element: <DashboardReservation></DashboardReservation>,
+      },
+      {
+        path: "admin",
+        element: <Admin></Admin>,
       },
     ],
   },

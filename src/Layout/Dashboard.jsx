@@ -1,6 +1,21 @@
 import { NavLink, Outlet } from "react-router-dom";
+import {
+  FaBars,
+  FaBook,
+  FaCalendar,
+  FaCalendarAlt,
+  FaCartPlus,
+  FaComment,
+  FaHome,
+  FaPeopleArrows,
+  FaPhoneAlt,
+  FaShoppingBag,
+  FaWallet,
+} from "react-icons/fa";
+import { ImSpoonKnife } from "react-icons/im";
 
 const Dashboard = () => {
+  const admin = true;
   const buttonClass = "uppercase text-white";
   return (
     <div className="drawer lg:drawer-open">
@@ -40,34 +55,87 @@ const Dashboard = () => {
               <p>Restaurant</p>
             </NavLink>
           </li>
+          {admin ? (
+            <div>
+              <li className="w-full my-1">
+                <NavLink to="/dashboard/admin" className={buttonClass}>
+                  <FaHome></FaHome>Admin Home
+                </NavLink>
+              </li>
+              <li className="w-full my-1">
+                <NavLink to="/dashboard/reservation" className={buttonClass}>
+                  <ImSpoonKnife></ImSpoonKnife> Add Items
+                </NavLink>
+              </li>
+              <li className="w-full my-1">
+                <NavLink to="/" className={buttonClass}>
+                  <FaBars></FaBars> Manage Items
+                </NavLink>
+              </li>
+              <li className="w-full">
+                <NavLink to="/" className={buttonClass}>
+                  <FaBook></FaBook>Manage Booking
+                </NavLink>
+              </li>
+              <li className="w-full">
+                <NavLink to="/dashboard" className={buttonClass}>
+                  <FaPeopleArrows></FaPeopleArrows>All Users
+                </NavLink>
+              </li>
+            </div>
+          ) : (
+            <div>
+              <li className="w-full my-1">
+                <NavLink to="/dashboard/home" className={buttonClass}>
+                  <FaHome></FaHome>User Home
+                </NavLink>
+              </li>
+              <li className="w-full my-1">
+                <NavLink to="/dashboard/reservation" className={buttonClass}>
+                  <FaCalendar></FaCalendar> Reservation
+                </NavLink>
+              </li>
+              <li className="w-full my-1">
+                <NavLink to="/" className={buttonClass}>
+                  <FaWallet></FaWallet>Payment History
+                </NavLink>
+              </li>
+              <li className="w-full">
+                <NavLink to="/dashboard/cart" className={buttonClass}>
+                  <FaCartPlus></FaCartPlus>My Cart
+                </NavLink>
+              </li>
+              <li className="w-full my-1">
+                <NavLink to="/" className={buttonClass}>
+                  <FaComment></FaComment> Add Review
+                </NavLink>
+              </li>
+              <li className="w-full my-1">
+                <NavLink to="/" className={buttonClass}>
+                  <FaCalendarAlt></FaCalendarAlt> My Booking
+                </NavLink>
+              </li>
+            </div>
+          )}
+          <div className="divider divider-white"></div>
           <li className="w-full my-1">
-            <NavLink to="/dashboard/home" className={buttonClass}>
-              User Home
-            </NavLink>
-          </li>
-          <li className="w-full my-1">
-            <NavLink to="/dashboard/reservation" className={buttonClass}>
-              Reservation
+            <NavLink to="/" className={buttonClass}>
+              <FaHome></FaHome> Home
             </NavLink>
           </li>
           <li className="w-full my-1">
             <NavLink to="/" className={buttonClass}>
-              Payment History
-            </NavLink>
-          </li>
-          <li className="w-full">
-            <NavLink to="/dashboard/cart" className={buttonClass}>
-              My Cart
+              <FaBars></FaBars> Menu
             </NavLink>
           </li>
           <li className="w-full my-1">
             <NavLink to="/" className={buttonClass}>
-              Add Review
+              <FaShoppingBag></FaShoppingBag> Shop
             </NavLink>
           </li>
           <li className="w-full my-1">
             <NavLink to="/" className={buttonClass}>
-              My Booking
+              <FaPhoneAlt></FaPhoneAlt> Contact
             </NavLink>
           </li>
         </ul>

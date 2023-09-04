@@ -68,32 +68,30 @@ const DashboardCart = () => {
             <tbody>
               {/* row 1 */}
               {cart?.map((item, index) => (
-                <>
-                  <tr>
-                    <th>{index + 1}</th>
-                    <td>
-                      <div className="flex items-center space-x-3">
-                        <div className="avatar">
-                          <div className="mask mask-square rounded-md w-6 h-6 md:w-12 md:h-12">
-                            <img src={item.image} alt="item" />
-                          </div>
+                <tr key={index}>
+                  <th>{index + 1}</th>
+                  <td>
+                    <div className="flex items-center space-x-3">
+                      <div className="avatar">
+                        <div className="mask mask-square rounded-md w-6 h-6 md:w-12 md:h-12">
+                          <img src={item.image} alt="item" />
                         </div>
                       </div>
-                    </td>
-                    <td>{item.name}</td>
-                    <td>{item.price}</td>
-                    <td>
-                      <button
-                        onClick={() => {
-                          handleDelete(item._id);
-                        }}
-                        className="btn bg-red-700 text-white btn-ghost"
-                      >
-                        <FaTrash></FaTrash>
-                      </button>
-                    </td>
-                  </tr>
-                </>
+                    </div>
+                  </td>
+                  <td>{item.name}</td>
+                  <td>{item.price}</td>
+                  <td>
+                    <button
+                      onClick={() => {
+                        handleDelete(item._id);
+                      }}
+                      className="btn bg-red-700 text-white btn-ghost"
+                    >
+                      <FaTrash></FaTrash>
+                    </button>
+                  </td>
+                </tr>
               ))}
             </tbody>
           </table>
