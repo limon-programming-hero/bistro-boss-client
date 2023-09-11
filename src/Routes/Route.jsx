@@ -9,8 +9,8 @@ import Secret from "./../Pages/Secret/Secret";
 import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "../Layout/Dashboard";
 import DashboardReservation from "../Pages/Dashboard/DashboardReservation/DashboardReservation";
-import DashboardCart from "../Pages/Dashboard/DashBoardCart/DashBoardCart";
 import Admin from "./../Pages/Dashboard/Admin/Admin/Admin";
+import DashboardCart from "./../Pages/Dashboard/DashboardCart/DashboardCart";
 
 const router = createBrowserRouter([
   {
@@ -49,15 +49,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <ProtectedRoute>
+        <Dashboard></Dashboard>
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "cart",
-        element: (
-          <ProtectedRoute>
-            <DashboardCart></DashboardCart>
-          </ProtectedRoute>
-        ),
+        element: <DashboardCart></DashboardCart>,
       },
       {
         path: "reservation",

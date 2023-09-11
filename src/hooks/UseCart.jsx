@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { authContext } from "../AuthProvider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 
-const UserCart = () => {
+const UseCart = () => {
   const { user } = useContext(authContext);
   const { data: cart = [], refetch } = useQuery({
     queryKey: ["carts", user?.email],
@@ -17,4 +17,4 @@ const UserCart = () => {
   return [cart, refetch];
 };
 
-export default UserCart;
+export default UseCart;

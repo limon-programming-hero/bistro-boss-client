@@ -3,10 +3,10 @@ import { NavLink, Link } from "react-router-dom";
 import { authContext } from "../../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { FaCartPlus } from "react-icons/fa";
-import UserCart from "../../../hooks/UserCart";
+import UseCart from "../../../hooks/UseCart";
 
 const Navbar = () => {
-  const [cart] = UserCart();
+  const [cart] = UseCart();
   const { user, LogOut } = useContext(authContext);
   const handleLogOut = () => {
     LogOut()

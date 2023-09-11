@@ -1,9 +1,9 @@
 import SharedTitle from "./../../Shared/SharedTitle/SharedTitle";
-import UserCart from "./../../../hooks/UserCart";
+import UseCart from "./../../../hooks/UseCart";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 const DashboardCart = () => {
-  const [cart, refetch] = UserCart();
+  const [cart, refetch] = UseCart();
   console.log(cart);
   const totalPrice = cart.reduce(
     (total, singleCart) => singleCart.price + total,

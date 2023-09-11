@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 import SharedCover from "../../Shared/SharedCover/SharedCover";
 import OrderImg from "./../../../assets/shop/banner2.jpg";
-import UserMenu from "../../../hooks/userMenu";
+import UseMenu from "../../../hooks/UseMenu";
 import Loading from "../../../Component/Loader/Loading";
 import FoodCard from "../../../Component/FoodCard/FoodCard";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -13,7 +13,7 @@ const Order = () => {
   const { item } = useParams();
   const index = allIndex.indexOf(item);
   console.log(index);
-  const [menu, loading] = UserMenu();
+  const [menu, loading] = UseMenu();
   const drinks = menu.filter((data) => data.category === "drinks");
   const dessert = menu.filter((data) => data.category === "dessert");
   const pizza = menu.filter((data) => data.category === "pizza");

@@ -1,5 +1,5 @@
 import SharedCover from "./../../Shared/SharedCover/SharedCover";
-import UserMenu from "../../../hooks/userMenu";
+import UseMenu from "../../../hooks/UseMenu";
 import CoverImg from "./../../../assets/menu/banner3.jpg";
 import dessertImg from "./../../../assets/menu/dessert-bg.jpeg";
 import pizzaImg from "./../../../assets/menu/pizza-bg.jpg";
@@ -11,7 +11,7 @@ import { Helmet } from "react-helmet";
 import Loading from "../../../Component/Loader/Loading";
 
 const Menu = () => {
-  const [menu, loading] = UserMenu();
+  const [menu, loading] = UseMenu();
   const offered = menu.filter((data) => data.category === "offered");
   const dessert = menu.filter((data) => data.category === "dessert");
   const pizza = menu.filter((data) => data.category === "pizza");

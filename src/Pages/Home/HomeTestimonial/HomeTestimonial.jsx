@@ -1,9 +1,9 @@
 import SharedTitle from "../../Shared/SharedTitle/SharedTitle";
 import HomeTestimonialSlide from "./HomeTestimonialSlide";
 import Loading from "./../../../Component/Loader/Loading";
-import UserReviews from "../../../hooks/UserReviews";
+import UseReviews from "../../../hooks/UseReviews";
 const HomeTestimonial = () => {
-  const [reviews, loading] = UserReviews();
+  const [reviews, loading] = UseReviews();
   return (
     <div className="w-3/4 mx-auto my-20">
       <SharedTitle
