@@ -19,7 +19,7 @@ const SignUp = () => {
   const path = location?.state?.from?.pathname || "/";
 
   const HandleSignUp = (data) => {
-    console.log(data);
+    // console.log(data);
     SignUpWithEmail(data.email, data.password)
       .then((result) => {
         console.log(result.user);
@@ -57,7 +57,7 @@ const SignUp = () => {
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
-      .then((data) => console.log({ data }));
+      .then((data) => console.log("data", data));
   };
 
   return (

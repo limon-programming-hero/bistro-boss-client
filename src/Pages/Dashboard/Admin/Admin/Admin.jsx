@@ -1,4 +1,4 @@
-import UseUsers from "./../../../../hooks/UseUsers";
+import UseUsers from "../../../../hooks/UseUsers";
 const Admin = () => {
   const [users] = UseUsers();
 

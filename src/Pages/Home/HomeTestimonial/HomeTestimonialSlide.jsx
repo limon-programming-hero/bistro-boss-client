@@ -7,7 +7,7 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 
 const HomeTestimonialSlide = ({ reviews }) => {
-  console.log(reviews);
+  // console.log(reviews);
   return (
     <div className="mt-10">
       <Swiper

@@ -10,6 +10,7 @@ import {
 import app from "../Firebase/Firebase.Config";
 import { createContext, useEffect, useState } from "react";
 import { GoogleAuthProvider } from "firebase/auth";
+import axios from "axios";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -57,7 +58,20 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       SetUser(currentUser);
-      SetLoading(false);
+      // get and set token to local storage
+      if (currentUser) {
+        axios
+          .post("http://localhost:3000/jwt", {
+            email: currentUser.email,
+          })
+          .then((data) => {
+            console.log("data token : ", data);
+            localStorage.setItem("jwt-access-token", data.data.token);
+            SetLoading(false);
+          });
+      } else {
+        localStorage.removeItem("jwt-access-token");
+      }
     });
     return () => {
       return unsubscribe();

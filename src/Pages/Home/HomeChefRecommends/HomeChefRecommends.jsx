@@ -11,7 +11,7 @@ const HomeChefRecommends = () => {
         setItems(popular);
       });
   }, []);
-  console.log(items);
+  // console.log(items);
   return (
     <div className="w-3/4 mx-auto">
       <SharedTitle

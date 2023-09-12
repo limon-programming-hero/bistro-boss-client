@@ -4,7 +4,9 @@ import { authContext } from "./../../AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import UseCart from "../../hooks/UseCart";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure";
 const FoodCard = ({ item }) => {
+  const [axiosSecure] = UseAxiosSecure();
   const { name, recipe, image, _id, price } = item;
   const { user } = useContext(authContext);
   const [, refetch] = UseCart();
@@ -20,24 +22,19 @@ const FoodCard = ({ item }) => {
       menuItemId: _id,
     };
     user &&
-      fetch("http://localhost:3000/carts", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(addItem),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          data.acknowledged &&
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Item Added!",
-              showConfirmButton: false,
-              timer: 900,
-            });
-          refetch();
-        });
-    console.log(addItem);
+      axiosSecure.post("/carts", addItem).then((data) => {
+        console.log("axios secure data", data.data);
+        data.data.acknowledged &&
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Item Added!",
+            showConfirmButton: false,
+            timer: 900,
+          });
+        refetch();
+        console.log(addItem);
+      });
   };
   return (
     <div className="card card-compact bg-base-100 shadow-lg">

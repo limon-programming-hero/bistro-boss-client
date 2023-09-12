@@ -10,10 +10,10 @@ const HomeMenu = () => {
       .then((res) => res.json())
       .then((data) => {
         const filteredData = data?.filter((data) => data?.category === "salad");
-        console.log(filteredData);
+        // console.log(filteredData);
         setMenu(filteredData);
       });
-    console.log(menu);
+    // console.log(menu);
   }, []);
   return (
     <div className="w-3/4 mx-auto my-12">
