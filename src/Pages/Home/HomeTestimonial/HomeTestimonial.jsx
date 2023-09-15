@@ -4,6 +4,7 @@ import Loading from "./../../../Component/Loader/Loading";
 import UseReviews from "../../../hooks/UseReviews";
 const HomeTestimonial = () => {
   const [reviews, loading] = UseReviews();
+  // console.log("reviews", reviews, "loading", loading);
   return (
     <div className="w-3/4 mx-auto my-20">
       <SharedTitle

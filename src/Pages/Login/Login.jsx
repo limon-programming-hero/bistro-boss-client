@@ -9,8 +9,11 @@ import { authContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
+import UseUsers from "../../hooks/UseUsers";
+import axios from "axios";
 
 const Login = () => {
+  const [users] = UseUsers();
   const [disabled, SetDisabled] = useState(true);
   const { LogInWithEmail, GoogleSignIn } = useContext(authContext);
 
@@ -26,6 +29,14 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     GoogleSignIn().then((result) => {
       console.log(result);
+      const user = {
+        name: result.user.displayName,
+        email: result.user.email,
+      };
+      const existingUser = users.find(
+        (user) => user.email === result.user.email
+      );
+      !existingUser && SetUserToDb(user);
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -35,6 +46,11 @@ const Login = () => {
       });
       navigate(path);
     });
+  };
+  const SetUserToDb = (user) => {
+    axios
+      .post("http://localhost:3000/users", user)
+      .then((data) => console.log("data", data));
   };
 
   // check captcha

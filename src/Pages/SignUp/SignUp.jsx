@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { authContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaGoogle } from "react-icons/fa";
+import axios from "axios";
 
 const SignUp = () => {
   const { SignUpWithEmail, addNameAndPhoto } = useContext(authContext);
@@ -26,7 +26,7 @@ const SignUp = () => {
         addNameAndPhoto(result.user, data.name, data.photoURL)
           .then(() => {
             const user = { name: data.name, email: data.email };
-            setUserToDb(user);
+            SetUserToDb(user);
             Swal.fire({
               position: "top-end",
               icon: "success",
@@ -37,6 +37,7 @@ const SignUp = () => {
             navigate(path);
           })
           .catch((errors) => {
+            console.log(errors.message);
             Swal.fire({
               position: "top-end",
               icon: "warning",
@@ -46,17 +47,20 @@ const SignUp = () => {
             });
           });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error.message);
+        Swal.fire({
+          position: "top-end",
+          icon: "warning",
+          title: "email-already-in-use",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
   };
-  const setUserToDb = (user) => {
-    fetch("http://localhost:3000/users", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
+  const SetUserToDb = async (user) => {
+    await axios
+      .post("http://localhost:3000/users", user)
       .then((data) => console.log("data", data));
   };
 
@@ -150,10 +154,7 @@ const SignUp = () => {
             </div>
             <span className="divider"></span>
           </form>
-          <button className="btn mx-auto btn-circle btn-outline">
-            <FaGoogle />
-          </button>
-          <p className="text-center my-4">
+          <p className="text-center mb-2">
             <small>
               Already have an account?{" "}
               <Link to="/login" className="cursor-pointer text-primary">

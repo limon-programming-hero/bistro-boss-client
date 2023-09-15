@@ -11,6 +11,7 @@ import Dashboard from "../Layout/Dashboard";
 import DashboardReservation from "../Pages/Dashboard/DashboardReservation/DashboardReservation";
 import Admin from "./../Pages/Dashboard/Admin/Admin/Admin";
 import DashboardCart from "./../Pages/Dashboard/DashboardCart/DashboardCart";
+import AdminUsers from "../Pages/Dashboard/Admin/AllUsers/AdminUsers";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: "admin",
         element: <Admin></Admin>,
+      },
+      {
+        path: "users",
+        element: <AdminUsers></AdminUsers>,
       },
     ],
   },

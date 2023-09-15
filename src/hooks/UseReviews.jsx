@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const UseReviews = () => {
-  const [reviews, setReviews] = useState([]);
-  const [loading, SetLoading] = useState(true);
-  useEffect(() => {
-    fetch("http://localhost:3000/reviews")
-      .then((res) => res.json())
-      .then((data) => {
-        setReviews(data);
-        SetLoading(false);
-      });
-  }, []);
+  const { data: reviews = [], isLoading: loading } = useQuery({
+    queryKey: ["reviews"],
+    queryFn: async () => {
+      const res = await axios.get("http://localhost:3000/reviews");
+      console.log(res);
+      return res.data;
+    },
+  });
   return [reviews, loading];
 };
 

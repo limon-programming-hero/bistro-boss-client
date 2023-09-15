@@ -78,7 +78,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li className="w-full">
-                <NavLink to="/dashboard" className={buttonClass}>
+                <NavLink to="/dashboard/users" className={buttonClass}>
                   <FaPeopleArrows></FaPeopleArrows>All Users
                 </NavLink>
               </li>

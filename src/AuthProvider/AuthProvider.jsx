@@ -65,7 +65,7 @@ const AuthProvider = ({ children }) => {
             email: currentUser.email,
           })
           .then((data) => {
-            console.log("data token : ", data);
+            // console.log("data token : ", data);
             localStorage.setItem("jwt-access-token", data.data.token);
             SetLoading(false);
           });
