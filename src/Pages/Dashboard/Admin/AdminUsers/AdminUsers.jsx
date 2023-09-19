@@ -21,7 +21,7 @@ const AdminUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         console.log(user._id);
-        axiosSecure.patch(`/users/admin/${user._id}`).then((data) => {
+        axiosSecure.patch(`/users/admin/${user?._id}`).then((data) => {
           console.log(data);
           refetch();
           data.data.modifiedCount &&

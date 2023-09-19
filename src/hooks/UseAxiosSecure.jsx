@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { authContext } from "../AuthProvider/AuthProvider";
+import UseAuth from "./UseAuth";
+import { useEffect } from "react";
 
 const axiosSecure = axios.create({
   baseURL: "http://localhost:3000",
@@ -9,9 +9,10 @@ const axiosSecure = axios.create({
 
 const UseAxiosSecure = () => {
   const navigate = useNavigate();
-  const { LogOut } = useContext(authContext);
+  const { LogOut } = UseAuth();
   useEffect(() => {
     axiosSecure.interceptors.request.use((config) => {
+      // console.log(config);
       const token = localStorage.getItem("jwt-access-token");
       const jwtToken = `Bearer ${token}`;
       if (token) {

@@ -1,22 +1,21 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-import { authContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
-import UseUsers from "../../hooks/UseUsers";
-import axios from "axios";
+import UseAuth from "../../hooks/UseAuth";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure";
+import SetUserToDb from "../../Component/SetUserToDb/SetUserToDb";
 
 const Login = () => {
-  const [users] = UseUsers();
   const [disabled, SetDisabled] = useState(true);
-  const { LogInWithEmail, GoogleSignIn } = useContext(authContext);
-
+  const { LogInWithEmail, GoogleSignIn, loading, user } = UseAuth();
+  const [axiosSecure] = UseAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
   const path = location?.state?.from?.pathname || "/";
@@ -27,16 +26,9 @@ const Login = () => {
 
   // google sign in handler
   const handleGoogleSignIn = () => {
-    GoogleSignIn().then((result) => {
+    GoogleSignIn().then(async (result) => {
       console.log(result);
-      const user = {
-        name: result.user.displayName,
-        email: result.user.email,
-      };
-      const existingUser = users.find(
-        (user) => user.email === result.user.email
-      );
-      !existingUser && SetUserToDb(user);
+      await CheckUser();
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -47,10 +39,25 @@ const Login = () => {
       navigate(path);
     });
   };
-  const SetUserToDb = (user) => {
-    axios
-      .post("http://localhost:3000/users", user)
-      .then((data) => console.log("data", data));
+  const CheckUser = async () => {
+    if (loading) {
+      if (loading) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Signing.....!",
+          showConfirmButton: false,
+          timer: 500,
+        });
+      }
+    }
+    if (!loading && user) {
+      await axiosSecure.get("/users/checkUser").then(async (data) => {
+        if (!data.data?.user) {
+          await SetUserToDb();
+        }
+      });
+    }
   };
 
   // check captcha

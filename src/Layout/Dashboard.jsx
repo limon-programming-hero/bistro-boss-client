@@ -13,9 +13,10 @@ import {
   FaWallet,
 } from "react-icons/fa";
 import { ImSpoonKnife } from "react-icons/im";
+import UseAdmin from "../hooks/UseAdmin";
 
 const Dashboard = () => {
-  const admin = true;
+  const [isAdmin, isAdminLoading] = UseAdmin();
   const buttonClass = "uppercase text-white";
   return (
     <div className="drawer lg:drawer-open">
@@ -55,7 +56,7 @@ const Dashboard = () => {
               <p>Restaurant</p>
             </NavLink>
           </li>
-          {admin ? (
+          {!isAdminLoading && isAdmin ? (
             <div>
               <li className="w-full my-1">
                 <NavLink to="/dashboard/admin" className={buttonClass}>
@@ -86,7 +87,7 @@ const Dashboard = () => {
           ) : (
             <div>
               <li className="w-full my-1">
-                <NavLink to="/dashboard/home" className={buttonClass}>
+                <NavLink to="/dashboard/" className={buttonClass}>
                   <FaHome></FaHome>User Home
                 </NavLink>
               </li>

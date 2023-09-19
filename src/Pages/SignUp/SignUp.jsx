@@ -1,13 +1,12 @@
-import { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
-import { authContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import UseAuth from "../../hooks/UseAuth";
+import SetUserToDb from "../../Component/SetUserToDb/SetUserToDb";
 
 const SignUp = () => {
-  const { SignUpWithEmail, addNameAndPhoto } = useContext(authContext);
+  const { SignUpWithEmail, addNameAndPhoto } = UseAuth();
   const {
     register,
     handleSubmit,
@@ -24,9 +23,9 @@ const SignUp = () => {
       .then((result) => {
         console.log(result.user);
         addNameAndPhoto(result.user, data.name, data.photoURL)
-          .then(() => {
-            const user = { name: data.name, email: data.email };
-            SetUserToDb(user);
+          .then(async () => {
+            // const user = { name: data.name, email: data.email };
+            await SetUserToDb();
             Swal.fire({
               position: "top-end",
               icon: "success",
@@ -58,11 +57,23 @@ const SignUp = () => {
         });
       });
   };
-  const SetUserToDb = async (user) => {
-    await axios
-      .post("http://localhost:3000/users", user)
-      .then((data) => console.log("data", data));
-  };
+  // const SetUserToDb = async () => {
+  //   if (loading) {
+  //     Swal.fire({
+  //       position: "center",
+  //       icon: "success",
+  //       title: "Signing.....!",
+  //       showConfirmButton: false,
+  //       timer: 500,
+  //     });
+  //   }
+  //   if (!loading && user) {
+  //     const userDetails = { name: user?.displayName, email: user?.email };
+  //     await axiosSecure
+  //       .post("/users", userDetails)
+  //       .then((data) => console.log(data.data));
+  //   }
+  // };
 
   return (
     <div className="hero min-h-screen bg-base-200">

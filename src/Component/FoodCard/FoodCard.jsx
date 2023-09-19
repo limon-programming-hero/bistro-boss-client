@@ -1,14 +1,13 @@
-import { useContext } from "react";
 import SharedButton from "../../Pages/Shared/SharedButton/SharedButton";
-import { authContext } from "./../../AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import UseCart from "../../hooks/UseCart";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure";
+import UseAuth from "../../hooks/UseAuth";
 const FoodCard = ({ item }) => {
   const [axiosSecure] = UseAxiosSecure();
   const { name, recipe, image, _id, price } = item;
-  const { user } = useContext(authContext);
+  const { user } = UseAuth();
   const [, refetch] = UseCart();
   const navigate = useNavigate();
 
