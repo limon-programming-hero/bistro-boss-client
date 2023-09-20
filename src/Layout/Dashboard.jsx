@@ -64,7 +64,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li className="w-full my-1">
-                <NavLink to="/dashboard/reservation" className={buttonClass}>
+                <NavLink to="/dashboard/additem" className={buttonClass}>
                   <ImSpoonKnife></ImSpoonKnife> Add Items
                 </NavLink>
               </li>

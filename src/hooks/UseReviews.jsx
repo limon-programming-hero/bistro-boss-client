@@ -6,7 +6,7 @@ const UseReviews = () => {
     queryKey: ["reviews"],
     queryFn: async () => {
       const res = await axios.get("http://localhost:3000/reviews");
-      console.log(res);
+      // console.log(res.data);
       return res.data;
     },
   });
