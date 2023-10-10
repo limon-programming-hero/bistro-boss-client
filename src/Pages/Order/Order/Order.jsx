@@ -13,7 +13,7 @@ const Order = () => {
   const { item } = useParams();
   const index = allIndex.indexOf(item);
   console.log(index);
-  const [menu, loading] = UseMenu();
+  const [menu, isMenuLoading] = UseMenu();
   const drinks = menu.filter((data) => data.category === "drinks");
   const dessert = menu.filter((data) => data.category === "dessert");
   const pizza = menu.filter((data) => data.category === "pizza");
@@ -30,7 +30,7 @@ const Order = () => {
         subHeading={"Would You Like to Try a Dish?"}
         image={OrderImg}
       ></SharedCover>
-      {loading ? (
+      {isMenuLoading ? (
         <Loading></Loading>
       ) : (
         <div className="my-12">

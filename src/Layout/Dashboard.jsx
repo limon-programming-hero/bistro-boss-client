@@ -42,7 +42,7 @@ const Dashboard = () => {
           Open Menu
         </label>
         {/* page content here */}
-        <div className="lg:w-full lg:mx-0">
+        <div className="w-full  lg:mx-0">
           <Outlet></Outlet>
         </div>
       </div>
@@ -59,7 +59,7 @@ const Dashboard = () => {
           {!isAdminLoading && isAdmin ? (
             <div>
               <li className="w-full my-1">
-                <NavLink to="/dashboard/admin" className={buttonClass}>
+                <NavLink to="/dashboard/adminHome" className={buttonClass}>
                   <FaHome></FaHome>Admin Home
                 </NavLink>
               </li>
@@ -87,7 +87,7 @@ const Dashboard = () => {
           ) : (
             <div>
               <li className="w-full my-1">
-                <NavLink to="/dashboard/" className={buttonClass}>
+                <NavLink to="/dashboard/userHome" className={buttonClass}>
                   <FaHome></FaHome>User Home
                 </NavLink>
               </li>
@@ -97,7 +97,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li className="w-full my-1">
-                <NavLink to="/" className={buttonClass}>
+                <NavLink to="/dashboard/paymentHistory" className={buttonClass}>
                   <FaWallet></FaWallet>Payment History
                 </NavLink>
               </li>

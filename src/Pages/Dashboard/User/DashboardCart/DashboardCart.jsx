@@ -1,8 +1,9 @@
-import SharedTitle from "./../../Shared/SharedTitle/SharedTitle";
-import UseCart from "./../../../hooks/UseCart";
+import SharedTitle from "../../../Shared/SharedTitle/SharedTitle";
+import UseCart from "../../../../hooks/UseCart";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
-import UseAxiosSecure from "../../../hooks/UseAxiosSecure";
+import UseAxiosSecure from "../../../../hooks/UseAxiosSecure";
+import { Link } from "react-router-dom";
 const DashboardCart = () => {
   const [axiosSecure] = UseAxiosSecure();
   const [cart, refetch, isCartLoading] = UseCart();
@@ -44,10 +45,13 @@ const DashboardCart = () => {
         heading={"wanna add more?"}
       ></SharedTitle>
       {!isCartLoading && (
-        <section className="flex flex-col bg-base-100 rounded-md md:p-10">
-          <div className="flex justify-around text-2xl mt-10 font-semibold">
+        <section className="flex mx-3 md:mx-0 flex-col bg-base-100 rounded-md md:p-10 mb-10">
+          <div className="flex justify-around text-2xl mt-10 mb-3 items-center font-semibold">
             <h3>Total Item : {cart?.length}</h3>
             <h3>Total Price : $ {totalPrice}</h3>
+            <Link to="/dashboard/payment">
+              <button className="btn btn-warning btn-outline">Pay</button>
+            </Link>
           </div>
           <div>
             <table className="table my-5 p-3 lg:p-0">

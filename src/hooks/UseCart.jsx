@@ -13,9 +13,7 @@ const UseCart = () => {
     queryKey: ["carts", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const response = await axiosSecure.get(
-        `http://localhost:3000/carts?email=${user?.email}`
-      );
+      const response = await axiosSecure.get(`/carts?email=${user?.email}`);
       return response?.data;
     },
   });

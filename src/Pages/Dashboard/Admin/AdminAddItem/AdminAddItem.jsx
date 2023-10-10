@@ -59,9 +59,9 @@ const AdminAddItem = () => {
         subHeading={"What's New?"}
         heading={"Add an Item"}
       ></SharedTitle>
-      <div className="flex flex-col bg-base-100 rounded-md md:p-10 w-3/4 mx-auto">
-        <form className="mx-3" onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-control my-2">
+      <div className="flex flex-col bg-base-100 rounded-md md:px-10 w-5/6 mx-auto mb-10">
+        <form className="w-5/6 md:w-full" onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-control px-2 md:px-0 w-full py-10 mb-2">
             <label className="label">
               <span className="label-text">*Item Name</span>
             </label>
@@ -69,13 +69,13 @@ const AdminAddItem = () => {
               {...register("name", { required: true })}
               type="text"
               placeholder="Recipe Name"
-              className="input input-bordered w-full"
+              className="input input-bordered w-"
             />
             {errors.name && (
               <p className="text-red-600">{errors.name?.message}</p>
             )}
           </div>
-          <div className="form-control w-full flex flex-col md:flex-row ">
+          <div className="form-control px-2 md:px-0 flex flex-col md:flex-row ">
             <div className="my-2 mr-3">
               <label className="label">
                 <span className="label-text">*Select Category</span>
@@ -114,7 +114,7 @@ const AdminAddItem = () => {
               )}
             </div>
           </div>
-          <div className="form-control my-2">
+          <div className="form-control px-2 md:px-0 my-2">
             <label className="label">
               <span className="label-text">*Recipe Details</span>
             </label>
@@ -127,7 +127,7 @@ const AdminAddItem = () => {
               <p className="text-red-600">{errors.recipe?.message}</p>
             )}
           </div>
-          <div className="form-control w-full my-2">
+          <div className="form-control px-2 md:px-0 w-full my-2">
             <label className="label">
               <span className="label-text">Pick an Image</span>
             </label>
@@ -140,7 +140,10 @@ const AdminAddItem = () => {
               <p className="text-red-600">{errors.image?.message}</p>
             )}
           </div>
-          <input className="btn btn-outline my-2" type="submit" />
+          <input
+            className="w-20 btn btn-outline btn-ghost my-2"
+            type="submit"
+          />
         </form>
       </div>
     </div>

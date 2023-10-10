@@ -8,12 +8,15 @@ import SignUp from "../Pages/SignUp/SignUp";
 import Secret from "./../Pages/Secret/Secret";
 import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "../Layout/Dashboard";
-import DashboardReservation from "../Pages/Dashboard/DashboardReservation/DashboardReservation";
-import Admin from "./../Pages/Dashboard/Admin/Admin/Admin";
-import DashboardCart from "./../Pages/Dashboard/DashboardCart/DashboardCart";
 import AdminRoute from "./AdminRoute";
 import AdminUsers from "../Pages/Dashboard/Admin/AdminUsers/AdminUsers";
 import AdminAddItem from "../Pages/Dashboard/Admin/AdminAddItem/AdminAddItem";
+import Payment from "../Pages/Dashboard/Payment/Payment";
+import UserPayment from "../Pages/Dashboard/User/UserPayment/UserPayment";
+import DashboardCart from "../Pages/Dashboard/User/DashboardCart/DashboardCart";
+import DashboardReservation from "./../Pages/Dashboard/User/DashboardReservation/DashboardReservation";
+import UserHome from "../Pages/Dashboard/User/UserHome/UserHome";
+import AdminHome from "./../Pages/Dashboard/Admin/AdminHome/AdminHome";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +61,7 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
+      // user routes
       {
         path: "cart",
         element: <DashboardCart></DashboardCart>,
@@ -67,10 +71,23 @@ const router = createBrowserRouter([
         element: <DashboardReservation></DashboardReservation>,
       },
       {
-        path: "admin",
+        path: "paymentHistory",
+        element: <UserPayment></UserPayment>,
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "userHome",
+        element: <UserHome></UserHome>,
+      },
+      // admin routes
+      {
+        path: "adminHome",
         element: (
           <AdminRoute>
-            <Admin></Admin>
+            <AdminHome></AdminHome>
           </AdminRoute>
         ),
       },

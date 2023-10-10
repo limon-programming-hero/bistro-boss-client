@@ -63,19 +63,19 @@ const AdminUsers = () => {
     });
   };
   return (
-    <div className="bg-base-200 flex flex-col w-full mx-auto items-center rounded-md h-full">
+    <div className="bg-base-200 w-full flex flex-col mx-auto items-center rounded-md h-full">
       <SharedTitle
         subHeading={"How many?"}
         heading={"Manage All User"}
       ></SharedTitle>
-      <section className="flex flex-col bg-base-100 rounded-md md:p-10">
+      <section className="flex flex-col bg-base-100 rounded-md p-3 md:p-10 mb-10">
         <div className="flex justify-start text-2xl mt-10 font-semibold">
           <h3>Total Users : {users.length}</h3>
         </div>
-        <div>
+        <div className=" mx-auto">
           <table className="table my-5 p-3 lg:p-0">
             {/* head */}
-            <thead className="bg-[#d39e4f] rounded-md">
+            <thead className="bg-[#d39e4f] rounded-md w-fit">
               <tr className="text-lg uppercase py-2">
                 <th>X</th>
                 <th>Name</th>
@@ -87,7 +87,7 @@ const AdminUsers = () => {
             <tbody>
               {/* row 1 */}
               {users?.map((user, index) => (
-                <tr key={index}>
+                <tr className="overflow-x-hidden" key={index}>
                   <th>{index + 1}</th>
                   <td>{user.name}</td>
                   <td>{user.email}</td>

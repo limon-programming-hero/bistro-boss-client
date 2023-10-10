@@ -11,7 +11,7 @@ import { Helmet } from "react-helmet";
 import Loading from "../../../Component/Loader/Loading";
 
 const Menu = () => {
-  const [menu, loading] = UseMenu();
+  const [menu, isMenuLoading] = UseMenu();
   const offered = menu.filter((data) => data.category === "offered");
   const dessert = menu.filter((data) => data.category === "dessert");
   const pizza = menu.filter((data) => data.category === "pizza");
@@ -33,7 +33,7 @@ const Menu = () => {
         heading={"Today's Offer"}
         subHeading={"Don't Miss!"}
       ></SharedTitle>
-      {loading ? (
+      {isMenuLoading ? (
         <Loading></Loading>
       ) : (
         <>
