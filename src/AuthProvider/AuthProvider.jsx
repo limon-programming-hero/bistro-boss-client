@@ -61,7 +61,7 @@ const AuthProvider = ({ children }) => {
       // get and set token to local storage
       if (currentUser) {
         axios
-          .post("http://localhost:3000/jwt", {
+          .post("https://bistro-boss-server-gray-nu.vercel.app/jwt", {
             email: currentUser.email,
           })
           .then((data) => {

@@ -9,7 +9,9 @@ const UseMenu = () => {
   } = useQuery({
     queryKey: ["menu"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:3000/menu");
+      const response = await axios.get(
+        "https://bistro-boss-server-gray-nu.vercel.app/menu"
+      );
       return response.data;
     },
   });
