@@ -50,15 +50,22 @@ const ItemAddUpdate = ({ isUpdate, defaultItem }) => {
       {
         isUpdate
           ? axiosSecure
-              .put(`/menu/${defaultItem?._id}`, newItem)
+              .patch(`/menu/${defaultItem?._id}`, newItem)
               .then((data) => {
                 console.log(data?.data);
-                if (data?.data.modifiedCount > 0) {
+                if (data?.data?.acknowledged && data?.data?.modifiedCount > 0) {
                   Swal.fire({
                     position: "top-end",
                     icon: "success",
                     title: "Item Updated successfully!",
                     timer: 1500,
+                  });
+                } else if (data?.data?.acknowledged) {
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "info",
+                    title: "Change something else to update!",
+                    timer: 2000,
                   });
                 }
               })
@@ -172,7 +179,10 @@ const ItemAddUpdate = ({ isUpdate, defaultItem }) => {
             )}
           </div>
         </div>
-        <input className="w-20 btn btn-outline btn-ghost my-2" type="submit" />
+        <input
+          className="w-20 btn btn-outline btn-ghost mt-3 mb-6"
+          type="submit"
+        />
       </form>
     </div>
   );
