@@ -17,6 +17,8 @@ import DashboardCart from "../Pages/Dashboard/User/DashboardCart/DashboardCart";
 import DashboardReservation from "./../Pages/Dashboard/User/DashboardReservation/DashboardReservation";
 import UserHome from "../Pages/Dashboard/User/UserHome/UserHome";
 import AdminHome from "./../Pages/Dashboard/Admin/AdminHome/AdminHome";
+import AdminManageAllItem from "../Pages/Dashboard/Admin/AdminManageAllItem/AdminManageAllItem";
+import AdminUpdateItem from "../Pages/Dashboard/Admin/AdminUpdateItem/AdminUpdateItem";
 
 const router = createBrowserRouter([
   {
@@ -88,6 +90,22 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "adminManageItems",
+        element: (
+          <AdminRoute>
+            <AdminManageAllItem></AdminManageAllItem>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "adminItemUpdate/:id",
+        element: (
+          <AdminRoute>
+            <AdminUpdateItem></AdminUpdateItem>
           </AdminRoute>
         ),
       },

@@ -69,7 +69,10 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li className="w-full my-1">
-                <NavLink to="/" className={buttonClass}>
+                <NavLink
+                  to="/dashboard/adminManageItems"
+                  className={buttonClass}
+                >
                   <FaBars></FaBars> Manage Items
                 </NavLink>
               </li>

@@ -83,7 +83,11 @@ const AdminHome = () => {
   return (
     <div className="w-full pb-12 min-h-screen pl-4">
       <h2 className="text-xl font-semibold font-mono mt-8">
-        Hi, Welcome Back {!isAdminStatsLoading && name}!
+        Hi, Welcome Back{" "}
+        <span className="text-amber-500 font-bold">
+          {!isAdminStatsLoading && name}
+        </span>
+        !
       </h2>
       {!isAdminStatsLoading && (
         <div className="flex flex-col mx-auto w-5/6">

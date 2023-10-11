@@ -3,10 +3,13 @@ import { NavLink, Link } from "react-router-dom";
 import { authContext } from "../../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { FaCartPlus } from "react-icons/fa";
+import { MdAdminPanelSettings } from "react-icons/md";
 import UseCart from "../../../hooks/UseCart";
+import UseAdmin from "../../../hooks/UseAdmin";
 
 const Navbar = () => {
   const [cart] = UseCart();
+  const [isAdmin, isAdminLoading] = UseAdmin();
   const { user, LogOut } = useContext(authContext);
   const handleLogOut = () => {
     LogOut()
@@ -49,9 +52,15 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink className={buttonClassName} to="/dashboard/cart">
-          <FaCartPlus />+{cart ? `${cart.length}` : "0"}
-        </NavLink>
+        {!isAdminLoading && isAdmin ? (
+          <NavLink className={buttonClassName} to="/dashboard/adminHome">
+            <MdAdminPanelSettings /> {"Admin"}
+          </NavLink>
+        ) : (
+          <NavLink className={buttonClassName} to="/dashboard/cart">
+            <FaCartPlus />+{cart ? `${cart.length}` : "0"}
+          </NavLink>
+        )}
       </li>
       <li>
         <NavLink className={buttonClassName} to="/secret">
