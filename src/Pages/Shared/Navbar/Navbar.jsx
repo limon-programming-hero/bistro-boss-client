@@ -62,11 +62,6 @@ const Navbar = () => {
           </NavLink>
         )}
       </li>
-      <li>
-        <NavLink className={buttonClassName} to="/secret">
-          Secret
-        </NavLink>
-      </li>
       {user ? (
         <li>
           <button onClick={handleLogOut} className={buttonClassName}>

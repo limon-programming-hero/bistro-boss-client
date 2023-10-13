@@ -5,7 +5,6 @@ import Menu from "../Pages/Menu/Menu/Menu";
 import Order from "../Pages/Order/Order/Order";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
-import Secret from "./../Pages/Secret/Secret";
 import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "../Layout/Dashboard";
 import AdminRoute from "./AdminRoute";
@@ -44,14 +43,6 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
-      },
-      {
-        path: "/secret",
-        element: (
-          <ProtectedRoute>
-            <Secret></Secret>
-          </ProtectedRoute>
-        ),
       },
     ],
   },
