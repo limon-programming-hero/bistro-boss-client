@@ -20,6 +20,12 @@ Welcome to the Bistro Boss Restaurant website! This repository showcases a moder
 
 Website: [https://bistro-boss-restaurant-01.web.app/](https://bistro-boss-restaurant-01.web.app/)
 
+## Checking Admin Activity
+
+If you want to check the admin activity of this website use the following email and password.And if you want to check the user activity just create an account .
+
+##### (email: kola5@gmail.com, password: 1234$asdfF)
+
 ## Contact
 
 Email: [limonhasan405@gmail.com](limonhasan405@gmail.com)
