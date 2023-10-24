@@ -9,13 +9,11 @@ import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import UseAuth from "../../hooks/UseAuth";
-import UseAxiosSecure from "../../hooks/UseAxiosSecure";
-import SetUserToDb from "../../Component/SetUserToDb/SetUserToDb";
+import axios from "axios";
 
 const Login = () => {
   const [disabled, SetDisabled] = useState(true);
-  const { LogInWithEmail, GoogleSignIn, loading, user } = UseAuth();
-  const [axiosSecure] = UseAxiosSecure();
+  const { LogInWithEmail, GoogleSignIn } = UseAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const path = location?.state?.from?.pathname || "/";
@@ -28,7 +26,7 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     GoogleSignIn().then(async (result) => {
       console.log(result);
-      await CheckUser();
+      await CheckUser(result?.user);
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -39,25 +37,30 @@ const Login = () => {
       navigate(path);
     });
   };
-  const CheckUser = async () => {
-    if (loading) {
-      if (loading) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Signing.....!",
-          showConfirmButton: false,
-          timer: 500,
-        });
-      }
-    }
-    if (!loading && user) {
-      await axiosSecure.get("/users/checkUser").then(async (data) => {
-        if (!data.data?.user) {
-          await SetUserToDb();
+
+  const CheckUser = async (user) => {
+    const email = user?.email;
+    const userDetails = {
+      name: user?.displayName,
+      email: user?.email,
+    };
+    console.log("Checking user");
+    await axios
+      .get(
+        `https://bistro-boss-server-gray-nu.vercel.app/users/checkUser?email=${email}`
+      )
+      .then(async (data) => {
+        console.log(data?.data);
+        if (!data?.data?.user) {
+          console.log("sending to server");
+          await axios
+            .post(
+              "https://bistro-boss-server-gray-nu.vercel.app/users",
+              userDetails
+            )
+            .then((data) => console.log(data?.data));
         }
       });
-    }
   };
 
   // check captcha

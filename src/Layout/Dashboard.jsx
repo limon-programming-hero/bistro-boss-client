@@ -1,7 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import {
   FaBars,
-  FaBook,
   FaCalendar,
   FaCalendarAlt,
   FaCartPlus,
@@ -13,6 +12,7 @@ import {
   FaWallet,
 } from "react-icons/fa";
 import { ImSpoonKnife } from "react-icons/im";
+import { AiFillMessage } from "react-icons/ai";
 import UseAdmin from "../hooks/UseAdmin";
 
 const Dashboard = () => {
@@ -77,8 +77,8 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li className="w-full">
-                <NavLink to="/" className={buttonClass}>
-                  <FaBook></FaBook>Manage Booking
+                <NavLink to="/dashboard/showContacts" className={buttonClass}>
+                  <AiFillMessage></AiFillMessage>Messages
                 </NavLink>
               </li>
               <li className="w-full">
@@ -110,12 +110,12 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li className="w-full my-1">
-                <NavLink to="/" className={buttonClass}>
+                <NavLink to="/dashboard/addreview" className={buttonClass}>
                   <FaComment></FaComment> Add Review
                 </NavLink>
               </li>
               <li className="w-full my-1">
-                <NavLink to="/" className={buttonClass}>
+                <NavLink to="/dashboard/booking" className={buttonClass}>
                   <FaCalendarAlt></FaCalendarAlt> My Booking
                 </NavLink>
               </li>
@@ -128,17 +128,17 @@ const Dashboard = () => {
             </NavLink>
           </li>
           <li className="w-full my-1">
-            <NavLink to="/" className={buttonClass}>
+            <NavLink to="/menu" className={buttonClass}>
               <FaBars></FaBars> Menu
             </NavLink>
           </li>
           <li className="w-full my-1">
-            <NavLink to="/" className={buttonClass}>
+            <NavLink to="/order/salad" className={buttonClass}>
               <FaShoppingBag></FaShoppingBag> Shop
             </NavLink>
           </li>
           <li className="w-full my-1">
-            <NavLink to="/" className={buttonClass}>
+            <NavLink to="/dashboard/contact" className={buttonClass}>
               <FaPhoneAlt></FaPhoneAlt> Contact
             </NavLink>
           </li>

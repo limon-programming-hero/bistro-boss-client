@@ -5,6 +5,7 @@ import UseCart from "../../../../hooks/UseCart";
 // import UseAxiosSecure from "../../../../hooks/UseAxiosSecure";
 import { Link } from "react-router-dom";
 import ItemsTable from "../../../../Component/ItemsTable/ItemsTable";
+import { Helmet } from "react-helmet";
 const DashboardCart = () => {
   // const [axiosSecure] = UseAxiosSecure();
   const [cart, refetch, isCartLoading] = UseCart();
@@ -42,6 +43,9 @@ const DashboardCart = () => {
 
   return (
     <div className="bg-base-200 flex flex-col w-full mx-auto items-center rounded-md h-full">
+      <Helmet>
+        <title>Bistro Boss | Cart</title>
+      </Helmet>
       <SharedTitle
         subHeading={"My Cart"}
         heading={"wanna add more?"}

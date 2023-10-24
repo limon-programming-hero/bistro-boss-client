@@ -1,26 +1,18 @@
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
-const imgToken = import.meta.env.VITE_image_upload_token;
 import UseAxiosSecure from "./../../hooks/UseAxiosSecure";
+import UploadImg from "./../UploadImg/UploadImg";
 
 const ItemAddUpdate = ({ isUpdate, defaultItem }) => {
   const [axiosSecure] = UseAxiosSecure();
   const [priceError, setPriceError] = useState("");
   const [img, setImg] = useState(defaultItem?.image ? defaultItem?.image : "");
-  const imgUrl = `https://api.imgbb.com/1/upload?key=${imgToken}`;
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const UploadImage = async (formData) => {
-    const res = await axios.post(imgUrl, formData);
-    return res.data;
-  };
 
   const onSubmit = async (data) => {
     const { name, recipe, price, image, category } = data;
@@ -29,8 +21,7 @@ const ItemAddUpdate = ({ isUpdate, defaultItem }) => {
     formData.append("image", imageFile);
     let imageData;
     if (imageFile) {
-      console.log(imageFile);
-      imageData = await UploadImage(formData);
+      imageData = await UploadImg(formData);
       console.log(imageData?.data?.display_url);
       setImg(imageData?.data?.display_url);
     }
@@ -40,9 +31,9 @@ const ItemAddUpdate = ({ isUpdate, defaultItem }) => {
       price: parseFloat(price),
       recipe,
       category,
-      image: img ? img : imageData?.data?.display_url,
+      image: imageData ? imageData?.data?.display_url : img,
     };
-
+    // console.log({ newItem }, { img });
     if (!newItem.price) {
       setPriceError("please provide a numeric value!");
     } else {

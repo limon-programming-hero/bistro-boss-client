@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import UseAuth from "../../hooks/UseAuth";
-import SetUserToDb from "../../Component/SetUserToDb/SetUserToDb";
+import axios from "axios";
+import UploadImg from "../../Component/UploadImg/UploadImg";
 
 const SignUp = () => {
   const { SignUpWithEmail, addNameAndPhoto } = UseAuth();
@@ -17,34 +18,48 @@ const SignUp = () => {
   const location = useLocation();
   const path = location?.state?.from?.pathname || "/";
 
-  const HandleSignUp = (data) => {
-    // console.log(data);
+  const HandleSignUp = async (data) => {
+    const { image } = data;
+    const imageFile = image[0];
+    const formData = new FormData();
+    formData.append("image", imageFile);
+    let imageData, ImgURL;
+    if (imageFile) {
+      imageData = await UploadImg(formData);
+      console.log(imageData?.data?.display_url);
+      ImgURL = imageData?.data?.display_url;
+    }
     SignUpWithEmail(data.email, data.password)
       .then((result) => {
         console.log(result.user);
-        addNameAndPhoto(result.user, data.name, data.photoURL)
-          .then(async () => {
-            // const user = { name: data.name, email: data.email };
-            await SetUserToDb();
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Sign Up Successful!",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            navigate(path);
-          })
-          .catch((errors) => {
-            console.log(errors.message);
-            Swal.fire({
-              position: "top-end",
-              icon: "warning",
-              title: { errors },
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          });
+        console.log(data.name, ImgURL);
+        result.user &&
+          addNameAndPhoto(data.name, ImgURL)
+            .then(() => {
+              const userDetails = {
+                name: data.name,
+                email: data.email,
+              };
+              console.log({ userDetails });
+              axios
+                .post(
+                  "https://bistro-boss-server-gray-nu.vercel.app/users",
+                  userDetails
+                )
+                .then((data) => {
+                  console.log(data?.data);
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Sign Up Successful!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  navigate(path);
+                });
+            })
+
+            .catch((error) => console.log(error));
       })
       .catch((error) => {
         console.log(error.message);
@@ -93,7 +108,7 @@ const SignUp = () => {
           <form onSubmit={handleSubmit(HandleSignUp)} className="card-body">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Name</span>
+                <span className="label-text">Name*</span>
               </label>
               <input
                 {...register("name", { required: true })}
@@ -107,21 +122,20 @@ const SignUp = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">PhotoURL</span>
+                <span className="label-text">Photo*</span>
               </label>
               <input
-                {...register("photoURL", { required: true })}
-                type="text"
-                placeholder="PhotoURL"
-                className="input input-bordered"
+                {...register("image", { required: true })}
+                type="file"
+                className="file-input file-input-bordered w-full max-w-xs"
               />
               {errors.photoURL && (
-                <span className="text-red-600">PhotoURL is required</span>
+                <span className="text-red-600">image is required</span>
               )}
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text">Email*</span>
               </label>
               <input
                 {...register("email", { required: true })}
@@ -135,7 +149,7 @@ const SignUp = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text">Password*</span>
               </label>
               <input
                 {...register("password", {

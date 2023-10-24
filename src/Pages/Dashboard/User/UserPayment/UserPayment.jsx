@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import SharedTitle from "../../../Shared/SharedTitle/SharedTitle";
 import UsePayment from "./../../../../hooks/UsePayment";
 const UserPayment = () => {
@@ -5,6 +6,9 @@ const UserPayment = () => {
 
   return (
     <div className="bg-base-200 flex flex-col w-full mx-auto items-center rounded-md h-full">
+      <Helmet>
+        <title>Bistro Boss | Payment</title>
+      </Helmet>
       <SharedTitle
         subHeading={"At a glance!"}
         heading={"Payment History"}

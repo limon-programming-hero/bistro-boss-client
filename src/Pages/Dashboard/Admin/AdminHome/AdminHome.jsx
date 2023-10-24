@@ -16,6 +16,7 @@ import {
   YAxis,
 } from "recharts";
 import { scaleOrdinal, schemeCategory10 } from "d3";
+import { Helmet } from "react-helmet";
 
 const AdminHome = () => {
   const [AdminStats, isAdminStatsLoading, name] = UseAdminStats();
@@ -82,6 +83,9 @@ const AdminHome = () => {
   };
   return (
     <div className="w-full pb-12 min-h-screen pl-4">
+      <Helmet>
+        <title>Bistro Boss | Admin Home</title>
+      </Helmet>
       <h2 className="text-xl font-semibold font-mono mt-8">
         Hi, Welcome Back{" "}
         <span className="text-amber-500 font-bold">

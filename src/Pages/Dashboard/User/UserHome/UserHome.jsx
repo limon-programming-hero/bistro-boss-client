@@ -3,12 +3,16 @@ import { BiHomeAlt, BiSolidStar } from "react-icons/bi";
 import { SlCalender } from "react-icons/sl";
 import { LuPhoneCall } from "react-icons/lu";
 import UseUserStats from "../../../../hooks/UseUserStats";
+import { Helmet } from "react-helmet";
 
 const UserHome = () => {
   const { userStats, isUserStatsLoading, name, photo } = UseUserStats();
   const { review, payment, menu } = userStats;
   return (
     <div className="w-full pb-12 border-red-300 border-8 min-h-screen pl-4">
+      <Helmet>
+        <title>Bistro Boss | User Home</title>
+      </Helmet>
       <h2 className="text-xl font-semibold font-mono mt-8">
         Hi, Welcome Back {!isUserStatsLoading && name}!
       </h2>

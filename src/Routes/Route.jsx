@@ -18,6 +18,8 @@ import UserHome from "../Pages/Dashboard/User/UserHome/UserHome";
 import AdminHome from "./../Pages/Dashboard/Admin/AdminHome/AdminHome";
 import AdminManageAllItem from "../Pages/Dashboard/Admin/AdminManageAllItem/AdminManageAllItem";
 import AdminUpdateItem from "../Pages/Dashboard/Admin/AdminUpdateItem/AdminUpdateItem";
+import UserContact from "../Pages/Dashboard/User/UserContact/UserContact";
+import AdminContacts from "../Pages/Dashboard/Admin/AdminContacts/AdminContacts";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +77,18 @@ const router = createBrowserRouter([
         path: "userHome",
         element: <UserHome></UserHome>,
       },
+      {
+        path: "contact",
+        element: <UserContact></UserContact>,
+      },
+      {
+        path: "addreview",
+        element: <DashboardReservation></DashboardReservation>,
+      },
+      {
+        path: "booking",
+        element: <DashboardReservation></DashboardReservation>,
+      },
       // admin routes
       {
         path: "adminHome",
@@ -113,6 +127,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AdminAddItem></AdminAddItem>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "showContacts",
+        element: (
+          <AdminRoute>
+            <AdminContacts></AdminContacts>
           </AdminRoute>
         ),
       },

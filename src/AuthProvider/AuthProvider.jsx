@@ -36,8 +36,9 @@ const AuthProvider = ({ children }) => {
   };
 
   // add name and photo (photoURL)
-  const addNameAndPhoto = (user, name, photoURL) => {
-    return updateProfile(user, {
+  const addNameAndPhoto = (name, photoURL) => {
+    // here we should use auth.currentUser instead of user because it takes time to update the user and so here found a null user and can't be updated.
+    return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photoURL,
     });
