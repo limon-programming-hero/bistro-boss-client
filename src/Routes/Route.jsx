@@ -20,6 +20,7 @@ import AdminManageAllItem from "../Pages/Dashboard/Admin/AdminManageAllItem/Admi
 import AdminUpdateItem from "../Pages/Dashboard/Admin/AdminUpdateItem/AdminUpdateItem";
 import UserContact from "../Pages/Dashboard/User/UserContact/UserContact";
 import AdminContacts from "../Pages/Dashboard/Admin/AdminContacts/AdminContacts";
+import Error404 from "../Pages/Error404/Error404";
 
 const router = createBrowserRouter([
   {
@@ -139,6 +140,10 @@ const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/*",
+    element: <Error404></Error404>,
   },
 ]);
 
